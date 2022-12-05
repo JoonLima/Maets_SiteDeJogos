@@ -21,7 +21,7 @@
 
 <script>
 import InputBase from "@/components/input/InputBase.vue";
-import BotaoBase from "@/components/botao/Botao.vue";
+import BotaoBase from "@/components/botao/BotaoBase.vue";
 
 export default {
   name: "LoginView",
@@ -45,14 +45,14 @@ div.box-login {
   padding: 20px;
   width: 450px;
   margin: auto;
-  border: 1px solid #ddd;
+  border: 1px solid;
   border-radius: 7px;
   margin-top: 70px;
   background-color: #181a21;
 }
 
 .logo {
-  margin-bottom: 20px;
+  padding: 25px;
   text-align: center;
   color: #ddd;
 }

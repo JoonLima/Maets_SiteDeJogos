@@ -1,6 +1,11 @@
 <template>
+
   <nav class="nav">
+
+    <a class="navbar-brand" href="#">Maets</a>
+
     <div class="menu-opcoes">
+
       <router-link to="/loja">Loja</router-link>
 
       <router-link to="/cadastro-de-jogos">Cadastro de Jogos</router-link>
@@ -10,41 +15,55 @@
       <router-link to="/">Login</router-link>
 
       <router-link to="/cadastro-de-usuario">Cadastro</router-link>
+        
     </div>
+
   </nav>
+  
 </template>
 
 <script>
 export default {
-  name: "MeuMenu",
+  name: "MeuMenu"
 };
 </script>
 
 <style scoped>
+
+.navbar-brand{
+  font-size: 29px;
+  overflow: hidden;
+  float: left;
+  text-decoration: none;
+  padding: 15px 20px;
+  font-weight: bold;
+  color: #ddd;
+}
+
 nav {
+  display: flex;
   background-color: #161a20;
 }
 
 .menu-opcoes {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-left: 270px;
+  align-items: center;
 }
 
 .menu-opcoes a {
   overflow: hidden;
-  float: left;
   text-decoration: none;
+  padding: 15px 20px;
   font-weight: bold;
   color: #ddd;
-  padding: 15px 17px;
-}
-
-a:first-child {
-  margin-left: 40px;
 }
 
 a:last-child {
+  
   float: right;
-  margin-right: 40px;
+
 }
 
 .menu-opcoes a:hover {

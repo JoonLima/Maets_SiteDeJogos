@@ -30,6 +30,7 @@ input {
   border-radius: 2px;
   box-sizing: border-box;
   background-color: #32353c;
+  color: #fff;
 }
 
 label {
