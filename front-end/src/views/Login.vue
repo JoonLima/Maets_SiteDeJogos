@@ -49,6 +49,7 @@ div.box-login {
   border-radius: 7px;
   margin-top: 70px;
   background-color: #181a21;
+  opacity: 0.95;
 }
 
 .logo {

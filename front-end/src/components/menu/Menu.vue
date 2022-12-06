@@ -2,7 +2,10 @@
 
   <nav class="nav">
 
-    <a class="navbar-brand" href="#">Maets</a>
+    <div class="logo">
+      <a class="navbar-brand" href="#">Maets</a>
+    </div>
+    
 
     <div class="menu-opcoes">
 
@@ -11,11 +14,15 @@
       <router-link to="/cadastro-de-jogos">Cadastro de Jogos</router-link>
 
       <router-link to="/">Sobre</router-link>
+        
+    </div>
+
+    <div class="login-cadastro">
 
       <router-link to="/">Login</router-link>
 
       <router-link to="/cadastro-de-usuario">Cadastro</router-link>
-        
+
     </div>
 
   </nav>
@@ -30,10 +37,9 @@ export default {
 
 <style scoped>
 
-.navbar-brand{
+.logo{
   font-size: 29px;
   overflow: hidden;
-  float: left;
   text-decoration: none;
   padding: 15px 20px;
   font-weight: bold;
@@ -42,13 +48,11 @@ export default {
 
 nav {
   display: flex;
-  background-color: #161a20;
 }
 
 .menu-opcoes {
   display: flex;
   justify-content: center;
-  margin-left: 270px;
   align-items: center;
 }
 
@@ -56,7 +60,18 @@ nav {
   overflow: hidden;
   text-decoration: none;
   padding: 15px 20px;
-  font-weight: bold;
+  color: #ddd;
+}
+
+.login-cadastro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav .login-cadastro a{
+  text-decoration: none;
+  padding: 15px 20px;
   color: #ddd;
 }
 

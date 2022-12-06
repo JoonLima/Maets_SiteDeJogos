@@ -12,7 +12,7 @@
 <script>
 import Menu from '@/components/menu/Menu.vue';
 
-export default {
+export default {  
   components: {
     Menu
   }
@@ -24,12 +24,16 @@ export default {
 
 body{
   font-family: 'Roboto', sans-serif;
-  background-image: url('@/image/1657346739_17-animeshka-org-p-tv-presentation-background-foni-17.jpg');
 }
 
-.container{
-  margin-top: 15px;
+#app{
+  background-image: url('@/image/1108624.jpg');
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
 }
+
 
 .titulo{
   color: #ddd;
