@@ -19,18 +19,18 @@ export default {
 
 button{
     width: 100%;
-    background-image: linear-gradient(to right, #09b9ff , #1b96fe , #2c72ff);
+    background-color:var(--cor-primaria);
     color: #ddd;
     padding: 10px;
     margin: 15px 0px;
     border: none;
-    border-radius: 2px;
+    border-radius: 3px;
     cursor: pointer;
     font-weight: bold;
 }
 
 button:hover{
-    background-color:  #fff;
+    background-color:  var(--cor-secundaria);;
 }
 
 </style>

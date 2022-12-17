@@ -2,15 +2,15 @@
     <div class="container">
       
       <div class="row">
-        <div class="col-sm-12 titulo">
+        <div class="col-sm-12">
           <h2 class="titulo">Cadastro de jogos</h2>
           <hr>
         </div>
       </div>
 
       <div class="row sub-container">
-        <div class="col-sm-2">
-          <BotaoBase value="Adicionar"></BotaoBase>
+        <div class="col-sm-1">
+          <BotaoBase :callback="adicionarJogo" value="Adicionar"></BotaoBase>
         </div>
       </div> 
       
@@ -34,13 +34,15 @@
                 <td>{{ item.valor | real }}</td>
                 <td>Ação</td>
                 <td>18</td>
-                <td>Editar / Excluir</td>
+                <td class="icones-linha">
+                  <i @click="editarJogo(item)" class="fas fa-pencil-alt icones-tabela"></i>
+                  <i @click="excluirJogo()" class="fas fa-trash-alt icones-tabela"></i>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-
     </div>
   </template>
   
@@ -66,7 +68,21 @@
       }
     },
     methods:{
-      obterTodosOsProdutos(){
+
+      adicionarJogo(){
+        this.$router.push({ name:"novo-jogo" })
+      },
+
+      editarJogo(jogo){
+        this.$router.push({ name:"editar-jogo", params:{id: jogo.id} })
+      },
+
+      excluirJogo(){
+        if(confirm(`Deseja excluir o jogo ${jogo.id}`))
+      },
+
+
+      obterTodosOsJogos(){
         produtoService.obterTodos()
         .then(response => { 
           this.produtos = response.data.map(p => new Produto(p));
@@ -75,18 +91,23 @@
       }
     },
     beforeMount(){
-      this.obterTodosOsProdutos();
+      this.obterTodosOsJogos();
     }
   }
   </script>
 
   <style scoped>
-  .table{
-    background-color: #1f2329;
-  }
-  .table th, .table td{
-    color: #ddd;
+
+  thead{
+    background-color: var(--cor-letras);
+    color: var(--cor-fundo);
   }
 
+  .icones-tabela{
+    margin: 5px;
+    cursor: pointer;
+    color: var(--cor-primaria);
+  }
+  
   </style>
   

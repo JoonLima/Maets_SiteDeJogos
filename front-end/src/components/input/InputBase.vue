@@ -25,16 +25,14 @@ input {
   padding: 10px;
   margin: 8px 0px;
   display: inline-block;
-  border: 1px solid #ddd;
+  border: 2px solid var(--cor-fundo);
   outline: none;
-  border-radius: 2px;
+  border-radius: 3px;
   box-sizing: border-box;
-  background-color: #32353c;
-  color: #fff;
 }
 
 label {
   font-weight: bold;
-  color: #ddd;
+  
 }
 </style>

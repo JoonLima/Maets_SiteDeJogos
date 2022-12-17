@@ -4,7 +4,7 @@
       <h1>LOGIN</h1>
     </div>
 
-    <InputBase label="Iniciar sessão com o nome de usuário" 
+    <InputBase label="Usuário" 
     placeHolder="exemplo@exemplo.com"
     ></InputBase>
 
@@ -14,7 +14,7 @@
     ></InputBase>
 
     <BotaoBase value="Iniciar Sessão"
-    :callback="disparar"
+    :callback="logar"
     ></BotaoBase>
   </div>
 </template>
@@ -33,8 +33,9 @@ export default {
 
   },
   methods:{
-    disparar(){
-      alert('Fui clicado!')
+    logar(){
+      //Criar uma lógica para acesso ao sistema.
+      this.$router.push({path:'/'})
     }
   }
 };
@@ -43,18 +44,18 @@ export default {
 <style scoped>
 div.box-login {
   padding: 20px;
-  width: 450px;
+  width: 300px;
   margin: auto;
-  border: 1px solid;
+  border: 2px solid;
   border-radius: 7px;
   margin-top: 70px;
-  background-color: #181a21;
-  opacity: 0.95;
+  background-color: #fff;
+  box-shadow: 0 0 0.7em var(--cor-primaria);;
 }
 
 .logo {
   padding: 25px;
   text-align: center;
-  color: #ddd;
+
 }
 </style>
