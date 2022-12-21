@@ -32,8 +32,5 @@ namespace backend.Model
 
         [Column("observacao")]
         public string Observacao { get; set; }
-
-        [Column("desenvolvedor")]
-        public Usuario Desenvolvedor { get; set; }
     }
 }

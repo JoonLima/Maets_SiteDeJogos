@@ -9,10 +9,10 @@ namespace backend.Interface
     public interface IUsuarioRepositorio
     {
         Task<IEnumerable<Usuario>> ObterUsuarios();
-        Task<Jogo> ObterUsuario(int id);
-        void AdicionaUsuario(Usuario usuario);
-        void AtualizaUsuario(Usuario usuario);
-        void DeletaUsuario(Usuario usuario);
+        Task<Usuario> ObterUsuario(int id);
+        Task<Usuario> AdicionaUsuario(Usuario usuario);
+        Task AtualizaUsuario(Usuario usuario);
+        Task DeletaUsuario(Usuario usuario);
 
     }
 }

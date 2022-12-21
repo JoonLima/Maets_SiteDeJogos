@@ -2,36 +2,50 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend.Data;
 using backend.Interface;
 using backend.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Repository
 {
     public class UsuarioRepositorio : IUsuarioRepositorio
     {
-        public void AdicionaUsuario(Usuario usuario)
+
+        private readonly BancoDeDados _bancoDeDados;
+
+        public UsuarioRepositorio(BancoDeDados bancoDeDados)
         {
-            throw new NotImplementedException();
+            _bancoDeDados = bancoDeDados;
         }
 
-        public void AtualizaUsuario(Usuario usuario)
+        public async Task<Usuario> AdicionaUsuario(Usuario usuario)
         {
-            throw new NotImplementedException();
+            await _bancoDeDados.AddAsync(usuario);
+            await _bancoDeDados.SaveChangesAsync();
+            return usuario;
         }
 
-        public void DeletaUsuario(Usuario usuario)
+        public async Task AtualizaUsuario(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _bancoDeDados.Update(usuario);
+            await _bancoDeDados.SaveChangesAsync();
         }
 
-        public Task<Jogo> ObterUsuario(int id)
+        public async Task DeletaUsuario(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _bancoDeDados.Remove(usuario);
+            await _bancoDeDados.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Usuario>> ObterUsuarios()
+        public async Task<Usuario> ObterUsuario(int id)
         {
-            throw new NotImplementedException();
+            return await _bancoDeDados.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<IEnumerable<Usuario>> ObterUsuarios()
+        {
+            return await _bancoDeDados.Usuarios.ToListAsync();
         }
     }
 }

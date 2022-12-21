@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using backend.Enum;
 
 namespace backend.Model
 {
@@ -21,7 +22,10 @@ namespace backend.Model
         [Column("nivel_conta")]
         public string NivelConta { get; set; }
 
-        [Column("admin")]
-        public bool Admin { get; set; }
+        [Column("tipo_perfil")]
+        
+        public PerfilEnum Perfil { get; set; }
+        [Column("senha")]
+        public string Senha{ get; set; }
     }
 }
