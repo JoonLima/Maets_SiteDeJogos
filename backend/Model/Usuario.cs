@@ -14,7 +14,6 @@ namespace backend.Model
         [Column("id")]
         public int Id { get; set; }
 
-        [Required]
         [MaxLength(120)]
         [Column("nome")]
         public string Nome { get; set; }

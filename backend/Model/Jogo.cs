@@ -13,20 +13,16 @@ namespace backend.Model
         [Column("id")]
         public int Id { get; set; }
 
-        [Required]
         [MaxLength(120)]
         [Column("nome")]
         public string Nome { get; set; }
 
-        [Required]
         [Column("preco")]
         public decimal Preco { get; set; }
 
-        [Required]
         [Column("categoria")]
         public string Categoria { get; set; }
 
-        [Required]
         [Column("classificacao")]
         public int Classificacao { get; set; }
 

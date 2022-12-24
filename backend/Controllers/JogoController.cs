@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using backend.Interface;
 using backend.Model;
-using backend.Repository;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+
 
 namespace backend.Controllers
 {
@@ -56,18 +50,24 @@ namespace backend.Controllers
             return Ok($"Jogo {jogoParaDeletar.Nome} deletado com sucesso.");
         }
 
-        // [HttpPut]
-        // public async Task<IActionResult> AtualizaJogo(Jogo jogo)
-        // {
-        //     var jogoParaAtualizar = await _repositorio.ObterJogo(jogo.Id);
-        //     if(jogoParaAtualizar == null)
-        //     {
-        //         return BadRequest("Jogo não encontrado. Verifique.");
-        //     }
+        [HttpPut]
+        public async Task<IActionResult> AtualizaJogo(Jogo jogo)
+        {
+            var jogoParaAtualizar = await _repositorio.ObterJogo(jogo.Id);
+            if(jogoParaAtualizar == null)
+            {
+                return BadRequest("Jogo não encontrado. Verifique.");
+            }
 
-        //     await _repositorio.AtualizaJogo(jogoParaAtualizar);
-        //     return Ok("Cadastro alterado com sucesso.");
+            jogoParaAtualizar.Nome = jogo.Nome;
+            jogoParaAtualizar.Preco = jogo.Preco;
+            jogoParaAtualizar.Categoria = jogo.Categoria;
+            jogoParaAtualizar.Classificacao = jogo.Classificacao;
+            jogoParaAtualizar.Observacao = jogo.Observacao;
 
-        // }
+            await _repositorio.AtualizaJogo(jogoParaAtualizar);
+            return Ok("Cadastro alterado com sucesso.");
+
+        }
     }
 }
