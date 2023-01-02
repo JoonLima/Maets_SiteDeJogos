@@ -66,7 +66,6 @@
             </div>
         </div>            
 
-
     </div>
 </template>
 
@@ -109,10 +108,9 @@ export default {
                 alert("Todos os campos devem ser preenchidos")
                 return;
             }
-
             jogoService.cadastrar(this.jogo)
             .then(() => {
-                alert("Jogo cadastrado com sucesso")
+                alert("Jogo cadastrado com sucesso.")
                 this.$router.push({ name: 'pagina-de-jogos' })
             })
             .catch(error => {
@@ -121,6 +119,19 @@ export default {
         },
 
         atualizarJogo(){
+            if(!this.jogo.modeloValidoParaCadastroEAtualizacao()){
+                alert("Todos os campos devem ser preenchidos")
+                return;
+            }
+
+            jogoService.atualizar(this.jogo)
+            .then(() => {
+                alert("Jogo atualizado com sucesso.")
+                this.$router.push({ name: 'pagina-de-jogos' })
+            })
+            .catch(error => {
+                console.log(error)
+            })
 
         },
 

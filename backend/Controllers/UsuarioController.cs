@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/usuarios")]
     public class UsuarioController : Controller
     {
 
@@ -36,7 +36,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AdicionaUsuario(Usuario usuario)
+        public async Task<IActionResult> AdicionaUsuario([FromBody]Usuario usuario)
         {
             var usuarioParaAdicionar = await _repositorio.AdicionaUsuario(usuario);
             return usuarioParaAdicionar == null ? BadRequest("Erro ao adicionar usuário.") : 

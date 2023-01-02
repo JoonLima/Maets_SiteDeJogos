@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/jogos")]
     public class JogoController : Controller
     {
 
@@ -31,10 +31,10 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AdicionaJogo(Jogo jogo)
+        public async Task<IActionResult> AdicionaJogo([FromBody]Jogo jogo)
         {
             var jogoParaAdicionar = await _repositorio.AdicionaJogo(jogo);
-            return jogoParaAdicionar == null ? BadRequest("Erro ao salvar cadastro.") : Ok("Jogo cadastrado com sucesso.");
+            return jogoParaAdicionar == null ? BadRequest("Erro ao salvar cadastro.") : Created("", jogoParaAdicionar);
         }
 
         [HttpDelete("{id}")]
@@ -47,11 +47,11 @@ namespace backend.Controllers
             }
 
             await _repositorio.DeletaJogo(jogoParaDeletar);
-            return Ok($"Jogo {jogoParaDeletar.Nome} deletado com sucesso.");
+            return NoContent();
         }
 
         [HttpPut]
-        public async Task<IActionResult> AtualizaJogo(Jogo jogo)
+        public async Task<IActionResult> AtualizaJogo([FromBody]Jogo jogo)
         {
             var jogoParaAtualizar = await _repositorio.ObterJogo(jogo.Id);
             if(jogoParaAtualizar == null)

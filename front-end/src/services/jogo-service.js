@@ -2,7 +2,7 @@ import { http }  from './config';
 
 function obterTodos(){
     return new Promise((resolve, reject) => {
-        return http.get('/Jogo')
+        return http.get('/jogos')
         .then(response => resolve(response))
         .catch(error => reject(error))
     })
@@ -10,7 +10,7 @@ function obterTodos(){
 
 function obterPorId(id){
     return new Promise((resolve, reject) => {
-        return http.get(`/Jogo/${id}`)
+        return http.get(`/jogos/${id}`)
         .then(response => resolve(response))
         .catch(error => reject(error))
     })
@@ -18,7 +18,7 @@ function obterPorId(id){
 
 function cadastrar(jogo){
     return new Promise((resolve, reject) => {
-        return http.post(`/Jogo`, jogo)
+        return http.post(`jogos`, jogo)
         .then(response => resolve(response))
         .catch(error => reject(error))
     })
@@ -26,7 +26,7 @@ function cadastrar(jogo){
 
 function atualizar(jogo){
     return new Promise((resolve, reject) => {
-        return http.put(`/Jogo/${jogo.id}`, jogo)
+        return http.put(`/jogos/`, jogo)
         .then(response => resolve(response))
         .catch(error => reject(error))
     })
@@ -34,7 +34,7 @@ function atualizar(jogo){
 
 function deletar(id){
     return new Promise((resolve, reject) => {
-        return http.delete(`/Jogo/${id}`)
+        return http.delete(`/jogos/${id}`)
         .then(response => resolve(response))
         .catch(error => reject(error))
     })

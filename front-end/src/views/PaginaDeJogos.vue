@@ -40,7 +40,7 @@
               <td>{{ item.classificacao }}</td>
               <td>
                 <i @click="editarJogo(item)" class="fas fa-pencil-alt icones-tabela"></i>
-                <i @click="excluirJogo()" class="fas fa-trash-alt icones-tabela"></i>
+                <i @click="excluirJogo(item)" class="fas fa-trash-alt icones-tabela"></i>
               </td>
             </tr>
           </tbody>
@@ -83,7 +83,10 @@ export default {
     obterTodosOsJogos(){
       jogoService.obterTodos()
       .then(response => {
-        this.jogos = response.data.map(j => new Jogo(j));
+        let jogos = response.data.map(j => new Jogo(j));
+
+        //ordenando do maior para o menor
+        this.jogos = jogos.sort().reverse();
       })
       .catch(error => {
         console.log(error)
@@ -94,8 +97,18 @@ export default {
       this.$router.push({ name: 'novo-jogo' })
     },
 
-    excluirJogo(){
-      alert('Excluir')
+    excluirJogo(jogo){
+      if(confirm(`Confirma exclusão do jogo ${jogo.id} - ${jogo.nome}?`)){
+        jogoService.deletar(jogo.id)
+        .then(() => {
+          let indice = this.jogos.findIndex(j => j.id == jogo.id);
+
+          this.jogos.splice(indice, 1)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
     },
 
     editarJogo(jogo){
