@@ -38,7 +38,12 @@ const routes = [
     },
     {
         path: '/pagina-de-usuarios/novo',
-        name: 'controle-de-usuarios',
+        name: 'novo-usuario',
+        component: Usuario
+    },
+    {
+        path: '/pagina-de-usuarios/editar',
+        name: 'editar-usuario',
         component: Usuario
     },
     

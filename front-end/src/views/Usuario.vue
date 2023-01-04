@@ -3,7 +3,7 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="titulo">Novo Usuário</h3>
+                <h3 class="titulo">{{ modoCadastro ? "Novo" : "Editar"  }}</h3>
                 <hr>
             </div>    
         </div>
@@ -13,22 +13,29 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="nome">Usuário</label>
-                    <input type="text" class="form-control">
+                    <input id="nome" v-model="usuario.nome" type="text" class="form-control">
                 </div>
             </div>
 
             <div class="col-sm-12 margin">
                 <div class="form-group">
-                    <label for="preco">Senha</label>
-                    <input type="text" class="form-control">
+                    <label for="preco">E-mail</label>
+                    <input id="email" v-model="usuario.email" type="text" class="form-control">
                 </div>
             </div>
 
             <div class="col-sm-12 margin">
                 <div class="form-group">
-                    <label for="categoria">Repita a senha</label>
-                    <input type="text" class="form-control">
+                    <label for="categoria">Senha</label>
+                    <input id="senha" v-model="usuario.senha" type="text" class="form-control">
                 </div>
+            </div>
+
+            <div class="col-sm-12 margin">
+                <label class="form-check-label">
+                    <input v-model="usuario.tipoPerfil" type="checkbox" class="form-check-input">
+                    Usuario Administrador
+                </label>
             </div>
 
         </div>
@@ -39,9 +46,11 @@
                 <hr>
             </div>
 
+            {{ usuario }}
+
             <div class="col-sm-12">
                 <button @click="cancelarAcao()" class="btn btn-default" type="button">Cancelar</button>
-                <button class="btn btn-primary" type="button">Gravar</button>
+                <button @click="cadastrarUsuario(usuario)" class="btn btn-primary" type="button">Cadastrar</button>
             </div>
         </div>            
 
@@ -50,13 +59,69 @@
 </template>
 
 <script>
+import Usuario from '@/Models/Usuario';
+import usuarioService from '@/services/usuario-service';
+
 export default {
     name: 'MeuJogo',
 
+    data(){
+        return{
+            usuario: new Usuario(),
+            modoCadastro: true
+        }
+    },
+
+    mounted(){
+        let id = this.$route.params.id;
+        if(!id) return;
+
+        this.modoCadastro = false;
+        this.obterUsuarioPorId(id);
+    },
+
     methods:{
+
+        obterUsuarioPorId(id){
+            usuarioService.obterPorId(id)
+            .then(response => {
+                this.usuario = new Usuario(response.data);
+            })
+            .catch(error => console.log(error));
+        },
+
+        cadastrarUsuario(){
+            usuarioService.cadastrar(this.usuario)
+            .then(() => {
+                this.$swal({
+                    icon: 'success',
+                    title: 'Usuario cadastrado com sucesso.',
+                    showConfirmButton: false,
+                    animate: true,
+                    timer: 2000
+                    })
+                this.$router.push({ name: 'pagina-de-usuarios' })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
+
+        atualizarUsuario(){
+            alert('atualizar')
+        },
+
         cancelarAcao(){
             this.$router.push({ name: 'pagina-de-usuarios' })
-        }
+        },
+
+        salvarUsuario(){
+            if(this.modoCadastro){
+                this.cadastrarUsuario();
+            }else{
+                this.atualizarUsuario();
+            }
+        },
     }
 }
 </script>

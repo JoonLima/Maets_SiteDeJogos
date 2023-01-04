@@ -44,7 +44,7 @@ namespace backend.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> AtualizaUsuario(Usuario usuario)
+        public async Task<IActionResult> AtualizaUsuario([FromBody]Usuario usuario)
         {
             var usuarioParaAlterar = await _repositorio.ObterUsuario(usuario.Id);
             if(usuarioParaAlterar == null) 

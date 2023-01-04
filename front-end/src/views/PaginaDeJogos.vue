@@ -98,17 +98,37 @@ export default {
     },
 
     excluirJogo(jogo){
-      if(confirm(`Confirma exclusão do jogo ${jogo.id} - ${jogo.nome}?`)){
-        jogoService.deletar(jogo.id)
-        .then(() => {
-          let indice = this.jogos.findIndex(j => j.id == jogo.id);
 
-          this.jogos.splice(indice, 1)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
+      this.$swal({
+        title: 'Deseja excluir o jogo?',
+        text: `Código ${jogo.id} - Nome: ${jogo.nome}`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#015393',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Cancelar',
+        animate: true
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+            jogoService.deletar(jogo.id)
+            .then(() => {
+            let indice = this.jogos.findIndex(j => j.id == jogo.id);
+            this.jogos.splice(indice, 1)
+            this.$swal({
+                    icon: 'success',
+                    title: 'Jogo excluído com sucesso.',
+                    showConfirmButton: false,
+                    animate: true,
+                    timer: 1500
+                    })
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        }
+      })
     },
 
     editarJogo(jogo){

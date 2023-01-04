@@ -18,12 +18,16 @@ namespace backend.Model
         [Column("nome")]
         public string Nome { get; set; }
 
+        [MaxLength(120)]
+        [Column("email")]
+        public string Email { get; set; }
+
         [Column("nivel_conta")]
         public string NivelConta { get; set; }
 
         [Column("tipo_perfil")]
-        
-        public PerfilEnum Perfil { get; set; }
+        public bool Perfil { get; set; }
+
         [Column("senha")]
         public string Senha{ get; set; }
     }

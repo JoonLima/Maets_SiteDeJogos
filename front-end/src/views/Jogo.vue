@@ -90,7 +90,6 @@ export default {
 
         this.modoCadastro = false;
         this.obterJogoPorId(id);
-        //preciso obter o produto por id
     },
 
     methods:{
@@ -105,12 +104,23 @@ export default {
 
         cadastrarJogo(){
             if(!this.jogo.modeloValidoParaCadastroEAtualizacao()){
-                alert("Todos os campos devem ser preenchidos")
+                this.$swal({
+                    icon: 'warning',
+                    title: 'Preencha os campos obrigatórios.',
+                    confirmButtonColor: '#015393',
+                    animate: true
+                    })
                 return;
             }
             jogoService.cadastrar(this.jogo)
             .then(() => {
-                alert("Jogo cadastrado com sucesso.")
+                this.$swal({
+                    icon: 'success',
+                    title: 'Jogo cadastrado com sucesso.',
+                    showConfirmButton: false,
+                    animate: true,
+                    timer: 2000
+                    })
                 this.$router.push({ name: 'pagina-de-jogos' })
             })
             .catch(error => {
@@ -120,13 +130,24 @@ export default {
 
         atualizarJogo(){
             if(!this.jogo.modeloValidoParaCadastroEAtualizacao()){
-                alert("Todos os campos devem ser preenchidos")
+                this.$swal({
+                    icon: 'warning',
+                    title: 'Preencha os campos obrigatórios.',
+                    confirmButtonColor: '#015393',
+                    animate: true
+                    })
                 return;
             }
 
             jogoService.atualizar(this.jogo)
             .then(() => {
-                alert("Jogo atualizado com sucesso.")
+                this.$swal({
+                    icon: 'success',
+                    title: 'Jogo atualizado com sucesso.',
+                    showConfirmButton: false,
+                    animate: true,
+                    timer: 2000
+                    })
                 this.$router.push({ name: 'pagina-de-jogos' })
             })
             .catch(error => {

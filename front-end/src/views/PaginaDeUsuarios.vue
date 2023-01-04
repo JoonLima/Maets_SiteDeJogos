@@ -26,6 +26,7 @@
             <tr>
               <th>Código</th>
               <th>Nome</th>
+              <th>E-mail</th>
               <th>Nível da conta</th>
               <th>Tipo perfil</th>
               <th>Senha</th>
@@ -36,11 +37,12 @@
             <tr v-for="item in usuarios" :key="item.id">
               <td>{{ item.id }}</td>
               <td>{{ item.nome }}</td>
+              <td>{{ item.email }}</td>
               <td>{{ item.nivelConta }}</td>
-              <td>{{ item.tipoPerfil }}</td>
+              <td>{{ item.tipoPerfil ? 'Admin' : 'Normal' }}</td>
               <td>{{ item.senha }}</td>
               <td>
-                <i @click="editarUsuario()" class="fas fa-pencil-alt icones-tabela"></i>
+                <i @click="editarUsuario(item)" class="fas fa-pencil-alt icones-tabela"></i>
                 <i @click="excluirUsuario()" class="fas fa-trash-alt icones-tabela"></i>
               </td>
             </tr>
@@ -81,11 +83,11 @@ export default {
     },
 
     adicionarNovoUsuario(){
-      this.$router.push({ name: 'controle-de-usuarios' })
+      this.$router.push({ name: 'novo-usuario' })
     },
 
-    editarUsuario(){
-      alert('editar')
+    editarUsuario(usuario){
+      this.$router.push({ name: 'editar-usuario', params: {id: usuario.id} })
     },
 
     excluirUsuario(){

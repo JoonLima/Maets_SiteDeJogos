@@ -2,7 +2,7 @@ import { http } from './config'
 
 function obterTodos(){
     return new Promise((resolve, reject) => {
-        return http.get('/Usuario')
+        return http.get('/usuarios')
         .then(response => resolve(response))
         .catch(error => reject(error))
     })
@@ -10,7 +10,7 @@ function obterTodos(){
 
 function obterPorId(id){
     return new Promise((resolve, reject) => {
-        return http.get(`/Usuario/${id}`)
+        return http.get(`/usuarios/${id}`)
         .then(response => resolve(response))
         .catch(error => reject(error))
     })
@@ -18,7 +18,7 @@ function obterPorId(id){
 
 function cadastrar(usuario){
     return new Promise((resolve, reject) => {
-        return http.post('/Usuario', usuario)
+        return http.post('/usuarios', usuario)
         .then(response => resolve(response))
         .catch(error => reject(error))
     })
@@ -26,7 +26,7 @@ function cadastrar(usuario){
 
 function atualizar(usuario){
     return new Promise((resolve, reject) => {
-        return http.put(`/Usuario/${usuario.id}`, usuario)
+        return http.put(`/usuarios`, usuario)
         .then(response => resolve(response))
         .catch(error => reject(error))
     })
@@ -34,7 +34,7 @@ function atualizar(usuario){
 
 function deletar(id){
     return new Promise((resolve, reject) => {
-        return http.delete(`/Usuario/${id}`)
+        return http.delete(`/usuarios/${id}`)
         .then(response => resolve(response))
         .catch(error => reject(error))
     })
