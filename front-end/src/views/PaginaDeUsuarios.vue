@@ -38,12 +38,12 @@
               <td>{{ item.id }}</td>
               <td>{{ item.nome }}</td>
               <td>{{ item.email }}</td>
-              <td>{{ item.nivelConta }}</td>
-              <td>{{ item.tipoPerfil ? 'Admin' : 'Normal' }}</td>
+              <td>{{ item.nivelConta | verificarNivel }}</td>
+              <td>{{ item.perfil == 1 ? 'Admin' : 'Padrão'}}</td>
               <td>{{ item.senha }}</td>
               <td>
                 <i @click="editarUsuario(item)" class="fas fa-pencil-alt icones-tabela"></i>
-                <i @click="excluirUsuario()" class="fas fa-trash-alt icones-tabela"></i>
+                <i @click="excluirUsuario(item)" class="fas fa-trash-alt icones-tabela"></i>
               </td>
             </tr>
           </tbody>
@@ -59,6 +59,7 @@
 import Botao from '@/components/Botao/Botao.vue';
 import usuarioService from '@/services/usuario-service';
 import Usuario from '@/Models/Usuario';
+import conversorNivel from '@/util/conversor-nivel-conta'
 
 export default {
   name: 'PaginaDeUsuarios',
@@ -72,12 +73,22 @@ export default {
     }
   },
 
+  filters:{
+
+    verificarNivel(nivel){
+      return conversorNivel.verificarNivel(nivel);
+    }
+
+},
+
   methods:{
 
     obterTodosOsUsuarios(){
       usuarioService.obterTodos()
       .then(resposta => {
-        this.usuarios = resposta.data.map(u => new Usuario(u))
+        let usuarios = resposta.data.map(u => new Usuario(u))
+
+        this.usuarios = usuarios.sort().reverse();
       })
       .catch(error => console.log(error))
     },
@@ -90,9 +101,38 @@ export default {
       this.$router.push({ name: 'editar-usuario', params: {id: usuario.id} })
     },
 
-    excluirUsuario(){
-      alert('excluir')
-    }
+    excluirUsuario(usuario){
+      this.$swal({
+        title: 'Deseja excluir o usuário?',
+        text: `Código ${usuario.id} - Nome: ${usuario.nome}`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#015393',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Cancelar',
+        animate: true
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+            usuarioService.deletar(usuario.id)
+            .then(() => {
+            let indice = this.usuarios.findIndex(j => j.id == usuario.id);
+            this.usuarios.splice(indice, 1)
+            this.$swal({
+                    icon: 'success',
+                    title: 'Usuário excluído com sucesso.',
+                    showConfirmButton: false,
+                    animate: true,
+                    timer: 1500
+                    })
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        }
+      })
+    },
 
   },
 

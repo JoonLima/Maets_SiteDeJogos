@@ -26,7 +26,7 @@ namespace backend.Model
         public string NivelConta { get; set; }
 
         [Column("tipo_perfil")]
-        public bool Perfil { get; set; }
+        public string Perfil { get; set; }
 
         [Column("senha")]
         public string Senha{ get; set; }

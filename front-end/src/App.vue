@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="nav">
-      <Menu></Menu>
+      <Menu v-if="verificarRotaParaMenu()"></Menu>
     </nav>
     <router-view/>
   </div>
@@ -13,6 +13,18 @@ import Menu from '@/components/Menu/Menu.vue';
 export default {
   components: {
     Menu
+  },
+
+  methods:{
+    verificarRotaParaMenu(){
+      if(this.$router.currentRoute.name == 'login'){
+        return false;
+      } else if (this.$router.currentRoute.name == 'cadastro'){
+        return false
+      } else {
+        return true
+      }
+    }
   }
 }
 </script>

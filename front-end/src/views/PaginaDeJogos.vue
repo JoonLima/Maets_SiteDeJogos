@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import Botao from '@/components/Botao/Botao.vue';
+import Botao from '@/components/Botao/Botao';
 import jogoService from '@/services/jogo-service.js';
 import Jogo from '@/Models/Jogo.js';
 import conversorMonetario from '@/util/conversor-monetario.js';

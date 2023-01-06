@@ -7,7 +7,7 @@
         </div>
         
         <div class="menu-login">
-            <router-link to="/">
+            <router-link to="/login">
                 <button type="button" class="btn btn-outline-dark">Login</button>
             </router-link>
         </div>

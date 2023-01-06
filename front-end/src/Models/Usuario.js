@@ -7,7 +7,7 @@ export default class Usuario{
         this.nome = usuario.nome;
         this.email = usuario.email;
         this.nivelConta = usuario.nivelConta;
-        this.tipoPerfil = usuario.tipoPerfil;
         this.senha = usuario.senha;
+        this.perfil = usuario.perfil;
     }
 }

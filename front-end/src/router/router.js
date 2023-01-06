@@ -4,15 +4,16 @@ import Loja from '@/views/Loja'
 import Login from '@/views/Login'
 import Jogo from '@/views/Jogo'
 import Usuario from '@/views/Usuario'
+import CadastroPadrao from '@/views/CadastroPadrao'
 
 const routes = [
     {
-      path: '/',
+      path: '/login',
       name: 'login',
       component: Login
     },
     {
-        path: '/loja',
+        path: '/',
         name: 'loja',
         component: Loja
     },
@@ -46,7 +47,11 @@ const routes = [
         name: 'editar-usuario',
         component: Usuario
     },
-    
+    {
+        path: '/cadastro',
+        name: 'cadastro',
+        component: CadastroPadrao
+    },    
   ]
 
   export default routes;

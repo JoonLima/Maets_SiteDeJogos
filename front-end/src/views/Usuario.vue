@@ -16,28 +16,53 @@
                     <input id="nome" v-model="usuario.nome" type="text" class="form-control">
                 </div>
             </div>
+        </div>
 
+        <div class="row">
             <div class="col-sm-12 margin">
                 <div class="form-group">
                     <label for="preco">E-mail</label>
                     <input id="email" v-model="usuario.email" type="text" class="form-control">
                 </div>
             </div>
+        </div>
 
+        <div class="row">
             <div class="col-sm-12 margin">
                 <div class="form-group">
                     <label for="categoria">Senha</label>
                     <input id="senha" v-model="usuario.senha" type="text" class="form-control">
                 </div>
             </div>
+        </div>
 
+        <div class="row">
             <div class="col-sm-12 margin">
-                <label class="form-check-label">
-                    <input v-model="usuario.tipoPerfil" type="checkbox" class="form-check-input">
-                    Usuario Administrador
+                <div class="form-group">
+                    <label class="tamanhoLabel" for="nivelConta">Nível da conta
+                        <select class="form-select" v-model="usuario.nivelConta" id="nivelConta">
+                            <option value="1">Bronze</option>
+                            <option value="2">Prata</option>
+                            <option value="3">Ouro</option>
+                            <option value="4">Platina</option>
+                            <option value="5">Diamante</option>
+                        </select>
+                    </label>
+
+                   
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 margin teste">
+                <label class="tamanhoLabel">Tipo de perfil
+                    <select class="form-select" placeholder="Selecione um estado" v-model="usuario.perfil" id="perfil">
+                        <option value="1">Administrador</option>
+                        <option value="2">Padrão</option>
+                    </select>
                 </label>
             </div>
-
         </div>
 
         <div class="row">
@@ -46,11 +71,9 @@
                 <hr>
             </div>
 
-            {{ usuario }}
-
             <div class="col-sm-12">
                 <button @click="cancelarAcao()" class="btn btn-default" type="button">Cancelar</button>
-                <button @click="cadastrarUsuario(usuario)" class="btn btn-primary" type="button">Cadastrar</button>
+                <button @click="salvarUsuario(usuario)" class="btn btn-primary" type="button">Cadastrar</button>
             </div>
         </div>            
 
@@ -68,7 +91,7 @@ export default {
     data(){
         return{
             usuario: new Usuario(),
-            modoCadastro: true
+            modoCadastro: true,
         }
     },
 
@@ -108,7 +131,20 @@ export default {
         },
 
         atualizarUsuario(){
-            alert('atualizar')
+            usuarioService.atualizar(this.usuario)
+            .then(() => {
+                this.$swal({
+                    icon: 'success',
+                    title: 'Usuario atualizado com sucesso.',
+                    showConfirmButton: false,
+                    animate: true,
+                    timer: 2000
+                    })
+                this.$router.push({ name: 'pagina-de-usuarios' })
+            })
+            .catch(error => {
+                console.log(error)
+            })
         },
 
         cancelarAcao(){
@@ -141,6 +177,9 @@ export default {
 
 .margin{
     margin-top: 10px;
+}
+.tamanhoLabel{
+    width: 100%;
 }
 
 .btn-primary{

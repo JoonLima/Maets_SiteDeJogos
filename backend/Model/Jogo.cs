@@ -28,5 +28,8 @@ namespace backend.Model
 
         [Column("observacao")]
         public string Observacao { get; set; }
+
+        [Column("usuarioId")]
+        public Usuario UsuarioId { get; set; }
     }
 }
